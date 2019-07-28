@@ -1,0 +1,25 @@
+{
+  "name": "complimentsboard",
+  "version": "1.0.0",
+  "description": "An app that allows a group to compliment each other in a transparent fashion.",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aviaweinstein/complimentsBoard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aviaweinstein/complimentsBoard/issues"
+  },
+  "homepage": "https://github.com/aviaweinstein/complimentsBoard#readme"
+}
