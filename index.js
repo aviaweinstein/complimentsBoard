@@ -36,24 +36,32 @@ MongoClient.connect(url, function(err, client) {
     const db = client.db(dbName);
 
     findDocuments(db, function() {
-        client.close();
+        // client.close();
     });
 
     app.post('/addwow', function (req, res) {
         var newWow = req.body.newwow;
-        db.wow.insertOne({text: newWow, giver: 'aweinstein@vacayhomeconnect.com', receiver: 'zkann@vacayhomeconnect.com'});
+        db.collection('wow').insertOne({text: newWow, giver: 'aweinstein@vacayhomeconnect.com', receiver: 'zkann@vacayhomeconnect.com'});
         res.redirect('/');
     });
 
     app.get('/', function(req, res) {
         db.collection('wow').find({}).toArray(function(err, result) {
-            // if (err) {
-            //     throw err;
-            //     return res.status(400).send(err);
-            // }
-            // console.log(result);
+            console.log(result);
+            if (err) {
+                throw err;
+                return res.status(400).send(err);
+            }
             res.render('index', { wow: result });
         });
+        // db.collection('wow').find({}).toArray(function (err, wows) {
+        //     if (err) {
+        //         return res.send(500, err);
+        //     }
+        //     res.render('index', {
+        //         wow: wows
+        //  });
+    // });
     });
 });
 

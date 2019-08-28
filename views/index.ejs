@@ -15,7 +15,7 @@
             </form>
             <h2> Added Wow </h2>
             <% for( var i = 0; i < wow.length; i++){ %>
-                <li><input type="checkbox" name="check" value="<%= wow[i] %>" /> <%= wow[i] %> </li>
+                <li><input type="checkbox" name="check" value="<%= wow[i]._id %>" /> <%= wow[i].text %> </li>
             <% } %>
             <h2> Completed wow </h2>
         </div>
