@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const url = 'mongodb://root:pass@localhost:27027/wowboard?authSource=admin';
+const url = process.env.DB;
 
 mongoose.Promise = global.Promise;
 
