@@ -1,8 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const bodyParser = require('body-parser');
-// const cors = require('cors');
+const flash = require('connect-flash');
+const jwt = require('./helpers/jwt');
+const errorHandler = require('./helpers/error-handler');
+const cors = require('cors');
 // const compression = require('compression');
 // const MongoClient = require('mongodb').MongoClient;
 // const assert = require('assert');
@@ -12,7 +17,12 @@ const app = express();
 // const dbName = 'wowboard';
 
 app.set('view engine', 'ejs');
-// app.use(cors());
+app.use(cors());
+app.use(jwt());
+app.use(errorHandler);
+app.use(cookieParser('keyboard cat'));
+app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(flash());
 // app.use(compression());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

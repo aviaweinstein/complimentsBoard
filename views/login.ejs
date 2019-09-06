@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title> Wow Board - login </title>
+        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
+        <link href="/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <form action ="/user/authenticate" method="POST">
+                <input type="email" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Password">
+                <button> Login </button>
+            </form>
+            <% for( var i = 0; i < messages.length; i++){ %>
+            <div><%= messages[i] %></div>
+            <% } %>
+        </div>
+    </body>
+</html>

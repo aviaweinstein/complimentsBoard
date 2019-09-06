@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
-const url = 'mongodb://root:pass@localhost:27027/wowboard?authSource=admin';
+const config = require('../../config.json');
+const url = config.connectionString
+// const url = 'mongodb://root:pass@localhost:27027/wowboard?authSource=admin';
 
 mongoose.Promise = global.Promise;
 
-const connection = mongoose.connect(url);
+const connection = mongoose.connect(url, { useCreateIndex: true, useNewUrlParser: true });
 
 connection
 	.then(db => {
