@@ -1,16 +1,11 @@
 extends layout
 
 block content
-  .w3-container
-    if locals.user
-      h4 You are logged in!
-      form(method='POST' action='/wows')
-        div.form-group
-          label(for='text') Wow:
-          input#name.form-control(type='text', placeholder='Add new wow' name='text')
-        button.btn.btn-primary(type='submit') Send wow
-      ul
-        each val in wow
-          li= val.text
-    else
-      h4 You are not logged in! Please #[a(href="/login") Log In] to continue.
+    .w3-container
+        if locals.user
+            h4 You are logged in!
+            ul
+                each val in wow
+                    li= val.text
+        else
+            h4 You are not logged in! Please #[a(href="/login") Log In] to continue.

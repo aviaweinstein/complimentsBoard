@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    form(method='POST' action='/wows')
+        div.form-group
+          label(for='text') Wow:
+          input#name.form-control(type='text', placeholder='Give a wow' name='text')
+        button.btn.btn-primary(type='submit') Send wow

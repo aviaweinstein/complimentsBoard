@@ -2,20 +2,21 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var dotenv = require('dotenv');
-var passport = require('passport');
-var Auth0Strategy = require('passport-auth0');
-var flash = require('connect-flash');
-var userInViews = require('./lib/middleware/userInViews');
-var authRouter = require('./routes/auth');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+let cookieParser = require('cookie-parser');
+let session = require('express-session');
+let dotenv = require('dotenv');
+let passport = require('passport');
+let Auth0Strategy = require('passport-auth0');
+let flash = require('connect-flash');
+let userInViews = require('./lib/middleware/userInViews');
+let authRouter = require('./routes/auth');
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
+let wowsRouter = require('./routes/wows');
 
 dotenv.config();
 // Configure Passport to use Auth0
-var strategy = new Auth0Strategy(
+let strategy = new Auth0Strategy(
     {
         domain: process.env.AUTH0_DOMAIN,
         clientID: process.env.AUTH0_CLIENT_ID,
@@ -51,7 +52,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 // config express-session
-var sess = {
+let sess = {
     secret: 'CHANGE THIS SECRET',
     cookie: {},
     resave: false,
@@ -85,6 +86,7 @@ app.use(userInViews());
 app.use('/', authRouter);
 app.use('/', indexRouter);
 app.use('/', usersRouter);
+app.use('/', wowsRouter);
 
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {

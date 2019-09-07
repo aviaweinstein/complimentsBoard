@@ -7,6 +7,11 @@ exports.list = (req, res) => {
 	});
 };
 
+// give a wow form
+exports.give = (req, res) => {
+	res.render('give_wow');
+};
+
 // create a wow
 exports.post = (req, res) => {
 	const data = req.body || {};
