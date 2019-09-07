@@ -24,7 +24,7 @@ router.get('/callback', function (req, res, next) {
         User.findOneAndUpdate(
             { user_id: user.user_id },
             { firstName: user.name.givenName, lastName: user.name.familyName, email: user.emails[0].value, user_id: user.user_id, picture: user.picture },
-            { upsert: true },
+            { upsert: true, useFindAndModify: false },
             function (err, existingUser) {
                 if (err) {
                     return next(new Error(err));
