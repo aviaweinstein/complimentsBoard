@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const url = process.env.DB;
 
 mongoose.Promise = global.Promise;
+mongoose.set('useCreateIndex', true);
 
 const connection = mongoose.connect(url);
 

@@ -14,7 +14,7 @@ const WowSchema = new Schema(
         giver: String,
             // trim: true,
             // required: true,
-        reciever: String,
+        receiver: String,
             // trim: true,
             // required: true,
     },

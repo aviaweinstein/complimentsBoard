@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    form(method='POST' action='/wows')
+        div.form-group
+            label(for='text') Wow:
+            input#name.form-control(type='text', placeholder='Give a wow', name='text', required)
+        div.form-group
+            label(for='receiver') Who are you wowing?
+            select(name='receiver', required)
+                option(value='') -- Select Person --
+                each user in users
+                    if user.firstName
+                        option(value=user.user_id) #{user.firstName} #{user.lastName}
+                    else
+                        option(value=user.user_id) #{user.email}
+        button.btn.btn-primary(type='submit') Send wow
