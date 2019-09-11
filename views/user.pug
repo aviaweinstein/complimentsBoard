@@ -9,3 +9,27 @@ block content
         p Note: <code>_raw</code> and <code>_json</code> properties have been ommited.
         pre
             code #{userProfile}
+    .row
+        .col.s12
+            ul.tabs
+                li.tab.col.s3
+                    a(href="#received") Received wows
+                li.tab.col.s3
+                    a(href="#given") Given wows
+        .col.s12#received
+            code #{wowsReceived}
+            if wowsReceived.length
+                ul
+                    each wow in wowsReceived
+                        li= wow.text
+            else
+                p No wows received yet, but keep trying!
+        .col.s12#given
+            code #{wowsGiven}
+            if wowsGiven.length
+                ul
+                    each wow in wowsGiven
+                        li= wow.text
+            else
+                p No wows given yet.
+                    a(href="/wows") Give your first wow!
