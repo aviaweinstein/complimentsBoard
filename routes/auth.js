@@ -21,9 +21,19 @@ router.get('/callback', function (req, res, next) {
     passport.authenticate('auth0', function (err, user, info) {
         if (err) { return next(err); }
         if (!user) { return res.redirect('/login'); }
+
+        let params = {
+            firstName: user.name.givenName,
+            lastName: user.name.familyName,
+            email: user.emails[0].value,
+            user_id: user.user_id,
+            picture: user.picture
+        }
+        for(let prop in params) if(!params[prop]) delete params[prop];
+
         User.findOneAndUpdate(
-            { user_id: user.user_id },
-            { firstName: user.name.givenName, lastName: user.name.familyName, email: user.emails[0].value, user_id: user.user_id, picture: user.picture },
+            { email: user.emails[0].value },
+            params,
             { upsert: true, useFindAndModify: false },
             function (err, existingUser) {
                 if (err) {
