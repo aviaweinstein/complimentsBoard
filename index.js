@@ -53,7 +53,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 // config express-session
 let sess = {
-    secret: 'CHANGE THIS SECRET',
+    secret: process.env.EXPRESS_SESSION_SECRET,
     cookie: {},
     resave: false,
     saveUninitialized: true

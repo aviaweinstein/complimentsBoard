@@ -3,26 +3,51 @@ const Schema = mongoose.Schema;
 const timestamps = require('mongoose-timestamp');
 const mongooseStringQuery = require('mongoose-string-query');
 
+const email = require('../utils/email');
+
 const WowSchema = new Schema(
     {
-        text: String,
+        text: {
+            type: String,
             // lowercase: true,
-            // trim: true,
+            trim: true,
             // index: true,
             // unique: true,
-            // required: true,
-        giver: String,
-            // trim: true,
-            // required: true,
-        receiver: String,
-            // trim: true,
-            // required: true,
+            required: true,
+        },
+        giver: {
+            type: String,
+            lowercase: true,
+            trim: true,
+            required: true,
+        },
+        receiver: {
+            type: String,
+            lowercase: true,
+            trim: true,
+            required: true,
+        },
     },
     { collection: 'wows' },
 );
 
-// pre-save hook that sends email via custom email utility
-// TODO: add email notification for new wows
+
+
+WowSchema.pre('save', function(next) {
+	if (!this.isNew) {
+		next();
+	}
+
+	email(this.toObject())
+		.then(() => {
+			next();
+		})
+		.catch(err => {
+			console.log(err);
+			next();
+		});
+});
+
 
 WowSchema.plugin(timestamps); // automatically adds createdAt and updatedAt timestamps
 WowSchema.plugin(mongooseStringQuery); // enables query capabilities (e.g. ?foo=bar)
