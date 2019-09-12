@@ -18,7 +18,7 @@ block content
                     a(href="#given") Given wows
         .col.s12#received
             code #{wowsReceived}
-            if wowsReceived.length
+            if wowsReceived && wowsReceived.length
                 ul
                     each wow in wowsReceived
                         li= wow.text
@@ -26,10 +26,9 @@ block content
                 p No wows received yet, but keep trying!
         .col.s12#given
             code #{wowsGiven}
-            if wowsGiven.length
+            if wowsGiven && wowsGiven.length
                 ul
                     each wow in wowsGiven
                         li= wow.text
             else
-                p No wows given yet.
-                    a(href="/wows") Give your first wow!
+                p No wows given yet. #[a(href="/wows") Give your first wow!]

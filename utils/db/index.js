@@ -4,11 +4,11 @@ const url = process.env.DB;
 mongoose.Promise = global.Promise;
 mongoose.set('useCreateIndex', true);
 
-const connection = mongoose.connect(url);
+const connection = mongoose.connect(url, { useNewUrlParser: true });
 
 connection
 	.then(db => {
-		console.log(`Successfully connected to ${url} MongoDB cluster.`,);
+		console.log(`Successfully connected to MongoDB cluster.`);
 		return db;
 	})
 	.catch(err => {
