@@ -19,8 +19,7 @@ exports.give = (req, res) => {
 exports.post = (req, res) => {
 	const data = req.body || {};
     const { _raw, _json, ...userProfile } = req.user;
-	data.giver = userProfile.user_id;
-	console.log('posting');
+	data.giver = userProfile.emails[0].value;
 
 	Wow.create(data)
 		.then(() => {

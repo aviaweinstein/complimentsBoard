@@ -5,10 +5,10 @@ exports.get = async function (req, res, next) {
     const { _raw, _json, ...userProfile } = req.user;
     let wowsGiven;
     let wowsReceived;
-    await Wow.find({ giver: userProfile.user_id }, function (err, wows) {
+    await Wow.find({ giver: userProfile.emails[0].value }, function (err, wows) {
         wowsGiven = wows;
 	});
-    await Wow.find({ receiver: userProfile.user_id }, function (err, wows) {
+    await Wow.find({ receiver: userProfile.emails[0].value }, function (err, wows) {
         wowsReceived = wows;
 	});
     res.render('user', {
