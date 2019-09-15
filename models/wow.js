@@ -31,8 +31,6 @@ const WowSchema = new Schema(
     { collection: 'wows' },
 );
 
-
-
 WowSchema.pre('save', function(next) {
 	if (!this.isNew) {
 		next();
@@ -47,7 +45,6 @@ WowSchema.pre('save', function(next) {
 			next();
 		});
 });
-
 
 WowSchema.plugin(timestamps); // automatically adds createdAt and updatedAt timestamps
 WowSchema.plugin(mongooseStringQuery); // enables query capabilities (e.g. ?foo=bar)

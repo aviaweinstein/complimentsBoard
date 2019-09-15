@@ -40,9 +40,6 @@ const UserSchema = new Schema(
     { collection: 'users' },
 );
 
-// pre-save hook that sends email via custom email utility
-// TODO: add email notification for new wows
-
 UserSchema.plugin(timestamps); // automatically adds createdAt and updatedAt timestamps
 UserSchema.plugin(mongooseStringQuery); // enables query capabilities (e.g. ?foo=bar)
 
