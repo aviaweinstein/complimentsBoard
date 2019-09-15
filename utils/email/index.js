@@ -1,6 +1,7 @@
 const fs = require('fs');
 const sgMail = require('@sendgrid/mail');
 const pug = require('pug');
+const User = require('../../models/user');
 
 const email = data => {
 	if (!data) {
@@ -11,16 +12,20 @@ const email = data => {
 		});
 	}
 
-	return new Promise((resolve, reject) => {
+	return new Promise(async (resolve, reject) => {
 		// if (config.env === 'test' || config.env === 'local') {
 		// 	return resolve();
 		// }
 
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+        let user;
+        await User.find({ email: data.giver }, function (err, users) {
+            user = users[0];
+        });
         const email = pug.render(
             fs.readFileSync(__dirname + '/templates/wow_received.pug', 'utf8'),
-            { data },
+            { data, user },
         );
         const msg = {
             to: data.receiver,
@@ -36,6 +41,7 @@ const email = data => {
                 },
             ],
         };
+
         sgMail
             .send(msg)
             .then(res => {
