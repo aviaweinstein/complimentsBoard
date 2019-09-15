@@ -19,13 +19,13 @@ const email = data => {
 
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-        let user;
-        await User.find({ email: data.giver }, function (err, users) {
-            user = users[0];
+        let giverUser;
+        await User.findOne({ email: data.giver }, function (err, user) {
+            giverUser = user;
         });
         const email = pug.render(
             fs.readFileSync(__dirname + '/templates/wow_received.pug', 'utf8'),
-            { data, user },
+            { data, giverUser },
         );
         const msg = {
             to: data.receiver,

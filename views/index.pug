@@ -1,11 +1,10 @@
 extends layout
+include mixins/wow_card
 
 block content
     .w3-container
         if locals.user
-            h4 You are logged in!
-            ul
-                each val in wow
-                    li= val.text
+            each val in wow.reverse()
+                +wow_card(val)
         else
             h4 You are not logged in! Please #[a(href="/login") Log In] to continue.

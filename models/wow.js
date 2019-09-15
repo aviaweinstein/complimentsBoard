@@ -27,6 +27,14 @@ const WowSchema = new Schema(
             trim: true,
             required: true,
         },
+        giverUser: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+        receiverUser: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        }
     },
     { collection: 'wows' },
 );

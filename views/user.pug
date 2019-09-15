@@ -1,34 +1,34 @@
 extends layout
+include mixins/wow_card
 
 block content
-    .w3-card-4
-        h1 Welcome #{user.nickname}
-        img(src=user.picture)
-        h2 User profile
-        p This is the content of <code>req.user</code>.
-        p Note: <code>_raw</code> and <code>_json</code> properties have been ommited.
-        pre
-            code #{userProfile}
-    .row
-        .col.s12
-            ul.tabs
-                li.tab.col.s3
-                    a(href="#received") Received wows
-                li.tab.col.s3
-                    a(href="#given") Given wows
-        .col.s12#received
-            code #{wowsReceived}
-            if wowsReceived && wowsReceived.length
-                ul
-                    each wow in wowsReceived
-                        li= wow.text
-            else
-                p No wows received yet, but keep trying!
-        .col.s12#given
-            code #{wowsGiven}
-            if wowsGiven && wowsGiven.length
-                ul
-                    each wow in wowsGiven
-                        li= wow.text
-            else
-                p No wows given yet. #[a(href="/wows") Give your first wow!]
+    .card
+        .card-content.text-center
+            h1.card-title Welcome 
+                if (currentUser.firstName)
+                    span #{currentUser.firstName} #{currentUser.lastName}
+                else
+                    span #{user.nickname}
+            .card-content
+                img(src=user.picture).profile-image
+    .card
+        .card-content
+            .row
+                .col.s12
+                    ul.tabs.z-depth-1
+                        li.tab.col.s3
+                            a(href="#received") Received wows
+                        li.tab.col.s3
+                            a(href="#given") Given wows
+                .col.s12#received
+                    if wowsReceived && wowsReceived.length
+                        each wow in wowsReceived.reverse()
+                            +wow_card(wow)
+                    else
+                        p No wows received yet, but keep trying!
+                .col.s12#given
+                    if wowsGiven && wowsGiven.length
+                        each wow in wowsGiven.reverse()
+                            +wow_card(wow)
+                    else
+                        p No wows given yet. #[a(href="/wows") Give your first wow!]

@@ -11,14 +11,14 @@ html
         script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js')
         script(src='/js/index.js')
 
-    body
-        nav.w3-bar.w3-border.w3-light-grey( role="navigation" )
-            .w3-bar-item.w3-text-grey Auth0 - NodeJS
-            a(href="/").w3-bar-item.w3-button Home
+    body.flex-container.flex-column
+        nav.w3-bar.w3-border( role="navigation" )
+            a(href="/").w3-bar-item Home
             if locals.user
-                a(href="/user" ).w3-bar-item.w3-button Profile
-                a(href="/wows" ).w3-bar-item.w3-button Give a wow
-                a(id="qsLogoutBtn" href="/logout").w3-bar-item.w3-button Log Out
+                a(href="/user" ).w3-bar-item Profile
+                a(href="/wows" ).w3-bar-item Give a wow
+                a(id="qsLogoutBtn" href="/logout").w3-bar-item Log Out
             else
-                a(id="qsLoginBtn" href="/login").w3-bar-item.w3-button Log In
-        block content
+                a(id="qsLoginBtn" href="/login").w3-bar-item Log In
+        .app-background.flex-grow-1
+            block content

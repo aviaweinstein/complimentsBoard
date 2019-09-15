@@ -1,6 +1,49 @@
-.w3-container a {
-    color: #337ab7;
-    text-decoration: none;
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+nav {
+    background-color: #e1bee7;
+}
+
+nav a {
+    color: black;
+}
+
+nav a:hover {
+    background-color: #f3e5f5;
+}
+
+p {
+    margin: 0;
+}
+
+.app-background {
+    background-color: #f6f6ff;
+}
+
+.wow-background-yellow {
+    background-color: #ffffe6;
+}
+
+.wow-background-blue {
+    background-color: #e6f7ff;
+}
+
+.wow-background-green {
+    background-color: #e6ffe6;
+}
+
+.wow-background-red {
+    background-color: #ffe6e6;
+}
+
+.wow-background-orange {
+    background-color: #fff2e6;
 }
 
 pre {
@@ -13,6 +56,36 @@ pre {
     padding: 15px
 }
 
-.w3-card-4 {
-    padding: 15px;
+.card {
+    max-width: 90%;
+    margin: 10px auto;
+}
+
+.card-panel .row {
+    margin-bottom: 0;
+}
+
+.profile-image {
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
 }

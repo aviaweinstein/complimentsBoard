@@ -1,0 +1,36 @@
+mixin wow_card(wow)
+    -function prettyDate(dateString){
+        -var date = new Date(dateString);
+        -var d = date.getDate();
+        -var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+        -var m = monthNames[date.getMonth()];
+        -var y = date.getFullYear();
+        -var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+        -var am_pm = date.getHours() >= 12 ? "PM" : "AM";
+        -hours = hours < 10 ? "0" + hours : hours;
+        -var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        -var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+        -return m + ' ' + d + ', ' + y + ' ' + hours + ":" + minutes + ":" + seconds + " " + am_pm;
+    -}
+    -function color(str){
+        -let colors = {0: 'wow-background-yellow', 1: 'wow-background-blue', 2: 'wow-background-green', 3: 'wow-background-red', 4: 'wow-background-orange'}
+        -let sum = 0;
+        -for (var i = 0; i < str.length; i++) {
+            -sum += str.charCodeAt(i);
+        -}
+        -return colors[sum%5];
+    -}
+    .card-panel.grey-text.text-darken-4(class=color(wow._id.toString()))
+        .row.flex-container
+            .col.s2
+                if (wow.receiverUser)
+                    img(src=wow.receiverUser.picture).profile-image
+            .col.s10.flex-container.flex-column
+                p.flex-grow-1= wow.text
+                if wow.giverUser
+                    p.text-right wow'ed by 
+                        if (wow.giverUser.firstName)
+                            span #{wow.giverUser.firstName} #{wow.giverUser.lastName}
+                        else
+                            span #{wow.giverUser.email}
+                        span on #{prettyDate(wow.createdAt)}
